@@ -49,12 +49,18 @@
       border-radius: 5px;
       box-shadow: 0 0 10px #fff5;
     }
+
+    .ascii {
+      white-space: pre;
+      font-family: monospace;
+    }
   </style>
 </head>
 <body>
   <div class="notepad" id="note1"></div>
   <div class="notepad" id="note2"></div>
   <div class="notepad" id="note3">
+    <div class="ascii" id="ascii3"></div>
     <img src="https://as2.ftcdn.net/v2/jpg/01/21/10/05/1000_F_121100555_cmi4pXIiT0kXuyiqvOmFylwFrMB1NmAq.jpg" alt="Imagem decorativa">
   </div>
 
@@ -124,13 +130,12 @@
       escreverChar();
     }
 
-    function loopAscii(noteId, artes) {
-      const note = document.getElementById(noteId);
+    function loopAscii(containerId, artes) {
+      const el = document.getElementById(containerId);
       let i = 0;
 
       function mostrarArte() {
-        note.innerHTML = artes[i] + note.innerHTML;
-        note.scrollTop = note.scrollHeight;
+        el.textContent = artes[i];
         i = (i + 1) % artes.length;
         setTimeout(mostrarArte, 1000);
       }
@@ -140,7 +145,7 @@
 
     escreverLoop("note1", frases[0]);
     escreverUnico("note2", frases[1]);
-    loopAscii("note3", asciiHearts);
+    loopAscii("ascii3", asciiHearts);
   </script>
 </body>
 </html>
