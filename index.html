@@ -9,20 +9,16 @@
       background-color: black;
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-    }
-
-    #intro {
-      font-family: 'Courier New', monospace;
-      color: violet;
-      font-size: 40px;
-      opacity: 1;
-      transition: opacity 2s ease-in-out;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px;
+      overflow-x: auto;
     }
 
     .notepad {
+      background: linear-gradient(180deg, #d4006f, #003f87, #d4006f);
+      background-size: 100% 300%;
+      animation: ledFlow 4s infinite linear;
       color: violet;
       font-family: monospace;
       padding: 10px;
@@ -31,22 +27,8 @@
       overflow-y: auto;
       white-space: pre-wrap;
       border-radius: 10px;
-      box-shadow: 0 0 15px violet;
-      transition: background-color 0.5s ease;
-      opacity: 0;
-      position: relative;
-    }
-
-    .notepad.visible {
-      opacity: 1;
-      transition: opacity 2s ease-in-out;
-    }
-
-    .notepad {
-      background: linear-gradient(180deg, #d4006f, #003f87, #d4006f);
-      background-size: 100% 300%;
-      animation: ledFlow 4s infinite linear;
       box-shadow: 0 0 25px #d4006f, 0 0 45px #003f87;
+      position: relative;
     }
 
     @keyframes ledFlow {
@@ -58,7 +40,6 @@
       }
     }
 
-    /* Estilo da imagem no bloco 3 */
     #note3 img {
       position: absolute;
       bottom: 10px;
@@ -71,8 +52,6 @@
   </style>
 </head>
 <body>
-  <div id="intro">Feliz Dia dos Namorados! 💖</div>
-
   <div class="notepad" id="note1"></div>
   <div class="notepad" id="note2"></div>
   <div class="notepad" id="note3">
@@ -159,20 +138,9 @@
       mostrarArte();
     }
 
-    function mostrarBlocos() {
-      document.getElementById("intro").style.opacity = 0;
-      setTimeout(() => {
-        document.getElementById("note1").classList.add('visible');
-        document.getElementById("note2").classList.add('visible');
-        document.getElementById("note3").classList.add('visible');
-      }, 2000);
-
-      escreverLoop("note1", frases[0]);
-      escreverUnico("note2", frases[1]);
-      loopAscii("note3", asciiHearts);
-    }
-
-    setTimeout(mostrarBlocos, 3000);
+    escreverLoop("note1", frases[0]);
+    escreverUnico("note2", frases[1]);
+    loopAscii("note3", asciiHearts);
   </script>
 </body>
 </html>
