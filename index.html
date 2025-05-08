@@ -48,6 +48,7 @@
       height: auto;
       border-radius: 5px;
       box-shadow: 0 0 10px #fff5;
+      pointer-events: none;
     }
 
     .assinatura {
@@ -57,11 +58,7 @@
       font-size: 12px;
       color: #ccc;
       font-style: italic;
-    }
-
-    .ascii {
-      white-space: pre;
-      font-family: monospace;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -69,7 +66,6 @@
   <div class="notepad" id="note1"></div>
   <div class="notepad" id="note2"></div>
   <div class="notepad" id="note3">
-    <div class="ascii" id="ascii3"></div>
     <img src="https://as2.ftcdn.net/v2/jpg/01/21/10/05/1000_F_121100555_cmi4pXIiT0kXuyiqvOmFylwFrMB1NmAq.jpg" alt="Imagem decorativa">
     <div class="assinatura">by Rhyan</div>
   </div>
@@ -111,4 +107,56 @@
 
       function escrever() {
         if (line % 100 === 0) {
-          note.innerHTML += "💜💜
+          note.innerHTML += "💜💜💜💜💜💜💜💜💜💜<br>";
+        } else {
+          note.innerHTML += `${texto}<br>`;
+        }
+        note.scrollTop = note.scrollHeight;
+        line++;
+        setTimeout(escrever, 20);
+      }
+
+      escrever();
+    }
+
+    function escreverUnico(noteId, texto) {
+      const note = document.getElementById(noteId);
+      let i = 0;
+      const chars = texto.split("");
+
+      function escreverChar() {
+        if (i < chars.length) {
+          note.innerHTML += chars[i];
+          note.scrollTop = note.scrollHeight;
+          i++;
+          setTimeout(escreverChar, 15);
+        }
+      }
+
+      escreverChar();
+    }
+
+    function loopAscii(noteId, artes) {
+      const note = document.getElementById(noteId);
+      let i = 0;
+
+      function mostrarArte() {
+        const arteEl = document.createElement("pre");
+        arteEl.textContent = artes[i];
+        note.insertBefore(arteEl, note.querySelector("img"));
+        const prev = note.querySelectorAll("pre");
+        if (prev.length > 1) note.removeChild(prev[0]);
+
+        i = (i + 1) % artes.length;
+        setTimeout(mostrarArte, 1000);
+      }
+
+      mostrarArte();
+    }
+
+    escreverLoop("note1", frases[0]);
+    escreverUnico("note2", frases[1]);
+    loopAscii("note3", asciiHearts);
+  </script>
+</body>
+</html>
