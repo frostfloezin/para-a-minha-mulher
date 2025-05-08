@@ -15,7 +15,6 @@
       overflow-x: auto;
     }
     .notepad {
-      background-color: #1e1e1e;
       color: violet;
       font-family: monospace;
       padding: 10px;
@@ -26,6 +25,22 @@
       border-radius: 10px;
       box-shadow: 0 0 15px violet;
       transition: background-color 0.5s ease;
+    }
+
+    #note2 {
+      background: linear-gradient(180deg, #ff00aa, #1e90ff, #ff00aa);
+      background-size: 100% 300%;
+      animation: ledFlow 4s infinite linear;
+      box-shadow: 0 0 25px #ff00aa, 0 0 45px #1e90ff;
+    }
+
+    @keyframes ledFlow {
+      0% {
+        background-position: 0% 0%;
+      }
+      100% {
+        background-position: 0% 100%;
+      }
     }
   </style>
 </head>
@@ -120,7 +135,9 @@
 
       setInterval(() => {
         notas.forEach(nota => {
-          nota.style.backgroundColor = rosa ? "#3f1e3f" : "#1e1e3f"; // rosa escuro e azul escuro
+          if (nota.id !== "note2") {
+            nota.style.backgroundColor = rosa ? "#ff00aa" : "#1e90ff";
+          }
         });
         rosa = !rosa;
       }, 1000);
