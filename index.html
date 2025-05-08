@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Para o Amor</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px;
+      overflow-x: auto;
+    }
+    .notepad {
+      background-color: #1e1e1e;
+      color: violet;
+      font-family: monospace;
+      padding: 10px;
+      width: 30%;
+      height: 95vh;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      border-radius: 10px;
+      box-shadow: 0 0 15px violet;
+    }
+  </style>
+</head>
+<body>
+  <div class="notepad" id="note1"></div>
+  <div class="notepad" id="note2"></div>
+  <div class="notepad" id="note3"></div>
+
+  <script>
+    const frases = [
+      "i love you 💜",
+      `obrigado por ter entrado na minha vida, vc e uma pessoa muito especial para mim, espero que vc nunca me deixe. Eu te amo muito meu bem❤️. achei isso simples oq eu fiz mas pode ter certeza que fiquei dias fazendo kkkkk espero que goste...`
+    ];
+
+    const asciiHearts = [
+`  .:::.   .:::.
+ :::::::.:::::::
+ :::::::::::::::
+ ':::::::::::::'
+   ':::::::::'
+     ':::::'
+       ':'`,
+
+`   *****     *****
+ ********** **********
+***********************
+***********************
+ *********************
+   ***************
+     ***********
+       *****
+         *`,
+
+`   _  _     _  _
+  ( \\/ ) _ ( \\/ )
+   \\  / (_) \\  /
+   (__)     (__)`
+    ];
+
+    function escreverLoop(noteId, texto) {
+      const note = document.getElementById(noteId);
+      let line = 1;
+
+      function escrever() {
+        if (line % 100 === 0) {
+          note.innerHTML += "💜💜💜💜💜💜💜💜💜💜<br>";
+        } else {
+          note.innerHTML += `${texto}<br>`;
+        }
+        note.scrollTop = note.scrollHeight;
+        line++;
+        setTimeout(escrever, 20);
+      }
+
+      escrever();
+    }
+
+    function escreverUnico(noteId, texto) {
+      const note = document.getElementById(noteId);
+      let i = 0;
+      const chars = texto.split("");
+
+      function escreverChar() {
+        if (i < chars.length) {
+          note.innerHTML += chars[i];
+          note.scrollTop = note.scrollHeight;
+          i++;
+          setTimeout(escreverChar, 15);
+        }
+      }
+
+      escreverChar();
+    }
+
+    function loopAscii(noteId, artes) {
+      const note = document.getElementById(noteId);
+      let i = 0;
+
+      function mostrarArte() {
+        note.innerHTML = artes[i];
+        note.scrollTop = note.scrollHeight;
+        i = (i + 1) % artes.length;
+        setTimeout(mostrarArte, 1000); // muda a cada 1s
+      }
+
+      mostrarArte();
+    }
+
+    escreverLoop("note1", frases[0]);
+    escreverUnico("note2", frases[1]);
+    loopAscii("note3", asciiHearts);
+  </script>
+</body>
+</html>
