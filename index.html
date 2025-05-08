@@ -27,8 +27,8 @@
       transition: background-color 0.5s ease;
     }
 
-    /* Bloco 2 - Efeito cachoeira */
-    #note2 {
+    /* Bloco 1, 2 e 3 - Efeito cachoeira */
+    .notepad {
       background: linear-gradient(180deg, #ff00aa, #1e90ff, #ff00aa);
       background-size: 100% 300%;
       animation: ledFlow 4s infinite linear;
@@ -44,18 +44,6 @@
       }
     }
 
-    /* Blocos 1 e 3 - Cores fortes rosa e azul */
-    #note1, #note3 {
-      background-color: #ff00aa; /* rosa forte */
-    }
-
-    #note1 {
-      background-color: #ff00aa; /* rosa forte */
-    }
-
-    #note3 {
-      background-color: #1e90ff; /* azul forte */
-    }
   </style>
 </head>
 <body>
@@ -143,24 +131,9 @@
       mostrarArte();
     }
 
-    function alternarCoresNotas() {
-      const notas = document.querySelectorAll('.notepad');
-      let rosa = true;
-
-      setInterval(() => {
-        notas.forEach(nota => {
-          if (nota.id !== "note2") {
-            nota.style.backgroundColor = rosa ? "#ff00aa" : "#1e90ff";
-          }
-        });
-        rosa = !rosa;
-      }, 1000);
-    }
-
     escreverLoop("note1", frases[0]);
     escreverUnico("note2", frases[1]);
     loopAscii("note3", asciiHearts);
-    alternarCoresNotas();
   </script>
 </body>
 </html>
