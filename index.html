@@ -42,12 +42,21 @@
 
     #note3 img {
       position: absolute;
-      bottom: 10px;
+      bottom: 30px;
       right: 10px;
       width: 60px;
       height: auto;
       border-radius: 5px;
       box-shadow: 0 0 10px #fff5;
+    }
+
+    .assinatura {
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
+      font-size: 12px;
+      color: #ccc;
+      font-style: italic;
     }
 
     .ascii {
@@ -62,6 +71,7 @@
   <div class="notepad" id="note3">
     <div class="ascii" id="ascii3"></div>
     <img src="https://as2.ftcdn.net/v2/jpg/01/21/10/05/1000_F_121100555_cmi4pXIiT0kXuyiqvOmFylwFrMB1NmAq.jpg" alt="Imagem decorativa">
+    <div class="assinatura">by Rhyan</div>
   </div>
 
   <script>
@@ -101,59 +111,4 @@
 
       function escrever() {
         if (line % 100 === 0) {
-          note.innerHTML += "💜💜💜💜💜💜💜💜💜💜<br>";
-        } else {
-          note.innerHTML += `${texto}<br>`;
-        }
-        note.scrollTop = note.scrollHeight;
-        line++;
-        setTimeout(escrever, 20);
-      }
-
-      escrever();
-    }
-
-    function escreverUnico(noteId, texto) {
-      const note = document.getElementById(noteId);
-      let i = 0;
-      const chars = texto.split("");
-
-      function escreverChar() {
-        if (i < chars.length) {
-          note.innerHTML += chars[i];
-          note.scrollTop = note.scrollHeight;
-          i++;
-          setTimeout(escreverChar, 15);
-        }
-      }
-
-      escreverChar();
-    }
-
-    function loopAscii(containerId, artes) {
-      const el = document.getElementById(containerId);
-      let i = 0;
-
-      function mostrarArte() {
-        el.textContent = artes[i];
-        i = (i + 1) % artes.length;
-        setTimeout(mostrarArte, 1000);
-      }
-
-      mostrarArte();
-    }
-
-    escreverLoop("note1", frases[0]);
-    escreverUnico("note2", frases[1]);
-    loopAscii("ascii3", asciiHearts);
-  </script>
-</body>
-</html>
-.assinatura {
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
-  font-size: 12px;
-  color: #ccc;
-  font-style: italic;
-}
+          note.innerHTML += "💜💜
