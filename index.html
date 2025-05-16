@@ -20,21 +20,31 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) rotate(0deg);
+      transform: translate(-50%, -50%) rotateY(0deg);
       width: 80%;
       height: auto;
-      opacity: 0.05;
+      opacity: 0;
       pointer-events: none;
-      animation: girarCoracao 20s linear infinite;
+      animation: aparecerCoracao 1.5s ease-in forwards, girarCoracao3D 10s linear infinite;
       z-index: 0;
+      transform-style: preserve-3d;
     }
 
-    @keyframes girarCoracao {
+    @keyframes girarCoracao3D {
       from {
-        transform: translate(-50%, -50%) rotate(0deg);
+        transform: translate(-50%, -50%) rotateY(0deg);
       }
       to {
-        transform: translate(-50%, -50%) rotate(360deg);
+        transform: translate(-50%, -50%) rotateY(360deg);
+      }
+    }
+
+    @keyframes aparecerCoracao {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 0.05;
       }
     }
 
