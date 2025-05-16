@@ -13,6 +13,29 @@
       gap: 10px;
       padding: 10px;
       overflow-x: auto;
+      position: relative;
+    }
+
+    .heart-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(0deg);
+      width: 80%;
+      height: auto;
+      opacity: 0.05;
+      pointer-events: none;
+      animation: girarCoracao 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes girarCoracao {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
     }
 
     .notepad {
@@ -29,6 +52,7 @@
       border-radius: 10px;
       box-shadow: 0 0 25px #d4006f, 0 0 45px #003f87;
       position: relative;
+      z-index: 1;
     }
 
     @keyframes ledFlow {
@@ -40,7 +64,7 @@
       }
     }
 
-    #note3 img {
+    #note3 img.decorativa {
       position: absolute;
       bottom: 30px;
       right: 10px;
@@ -63,10 +87,12 @@
   </style>
 </head>
 <body>
+  <img class="heart-bg" src="https://cdn-icons-png.flaticon.com/512/833/833472.png" alt="Coração girando">
+
   <div class="notepad" id="note1"></div>
   <div class="notepad" id="note2"></div>
   <div class="notepad" id="note3">
-    <img src="https://as2.ftcdn.net/v2/jpg/01/21/10/05/1000_F_121100555_cmi4pXIiT0kXuyiqvOmFylwFrMB1NmAq.jpg" alt="Imagem decorativa">
+    <img class="decorativa" src="https://as2.ftcdn.net/v2/jpg/01/21/10/05/1000_F_121100555_cmi4pXIiT0kXuyiqvOmFylwFrMB1NmAq.jpg" alt="Imagem decorativa">
     <div class="assinatura">by Rhyan</div>
   </div>
 
@@ -143,7 +169,7 @@
       function mostrarArte() {
         const arteEl = document.createElement("pre");
         arteEl.textContent = artes[i];
-        note.insertBefore(arteEl, note.querySelector("img"));
+        note.insertBefore(arteEl, note.querySelector("img.decorativa"));
         const prev = note.querySelectorAll("pre");
         if (prev.length > 1) note.removeChild(prev[0]);
 
