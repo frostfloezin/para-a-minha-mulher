@@ -96,7 +96,7 @@
       pointer-events: none;
     }
 
-    /* Botão no tamanho da letra */
+    /* Botão do tamanho da letra */
     #note2 button {
       display: inline-block;
       margin-left: 5px;
@@ -144,7 +144,7 @@
   <script>
     const frases = [
       "i love you 💜",
-      `obrigado por ter entrado na minha vida, vc e uma pessoa muito especial para mim, espero que vc nunca me deixe. Eu te amo muito meu bem❤️. achei isso simples oq eu fiz mas pode ter certeza que fiquei dias fazendo kkkkk espero que goste. quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigra ou etc, te garanto que sempre fui e vou ser leal a ti.`
+      `Obrigado por ter entrado na minha vida, vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem ❤️. Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo, kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigas ou etc; te garanto que sempre fui e vou ser leal a ti. Vc foi a única pessoa que me senti bem e confortável pra ser eu mesmo; esse é um dos vários motivos por quis eu te amo tanto. Espero, mesmo sem ter muita condição financeira pra te dar várias e várias coisa, que vc saiba que eu tento fazer o meu melhor. Obrigado por me fazer ser uma pessoa melhor por vc.`
     ];
 
     const asciiHearts = [
@@ -197,10 +197,9 @@
 
       function escreverChar() {
         if (i < chars.length) {
-          // Quando encontrar o último ponto final, insere o botão logo após ele
+          // Quando achar o último ponto final, coloca o botão logo depois
           if (chars[i] === '.' && i === texto.lastIndexOf('.')) {
             note.innerHTML += '.';
-            // Criar botão
             const botao = document.createElement("button");
             botao.textContent = "EU TE AMO";
             botao.onclick = () => {
