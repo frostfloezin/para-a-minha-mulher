@@ -24,9 +24,9 @@
       width: 80%;
       height: auto;
       opacity: 0;
-      pointer-events: none; /* não bloqueia clique */
+      pointer-events: none;
       animation: aparecerCoracao 1.5s ease-in forwards, girarCoracao3D 10s linear infinite;
-      z-index: 10; /* acima dos blocos */
+      z-index: 10;
       transform-style: preserve-3d;
     }
 
@@ -44,7 +44,7 @@
         opacity: 0;
       }
       to {
-        opacity: 0.15; /* aumentei aqui */
+        opacity: 0.15;
       }
     }
 
@@ -95,15 +95,16 @@
       pointer-events: none;
     }
 
-    /* Botão EU TE AMO estilizado */
+    /* Botão no tamanho da letra */
     #note2 button {
       display: inline-block;
       margin-left: 5px;
-      padding: 5px 12px;
+      padding: 0 4px;
       font-weight: bold;
-      font-size: 14px;
+      font-size: 14px; /* mesmo tamanho da letra */
+      line-height: 1;
       border: none;
-      border-radius: 8px;
+      border-radius: 4px;
       cursor: pointer;
       background-color: blue;
       color: white;
@@ -112,14 +113,20 @@
       vertical-align: middle;
       transition: filter 0.3s;
     }
-
     #note2 button:hover {
       filter: brightness(1.2);
     }
 
     @keyframes piscarCor {
-      0% { background-color: blue; }
-      100% { background-color: pink; }
+      0% {
+        background-color: #003f87;
+      }
+      50% {
+        background-color: #d4006f;
+      }
+      100% {
+        background-color: #003f87;
+      }
     }
   </style>
 </head>
@@ -136,7 +143,7 @@
   <script>
     const frases = [
       "i love you 💜",
-      `Obrigado por ter entrado na minha vida, vc é uma pessoa muito especial para mim, espero que vc nunca me deixe. Eu te amo muito, meu bem❤️. Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigas ou etc, te garanto que sempre fui e vou ser leal a ti. Vc foi a única pessoa que me senti bem e confortável pra ser eu mesmo; esse é um dos vários motivos por quis eu te amo tanto. Espero, mesmo sem ter muita condição financeira pra te dar várias e várias coisa, que vc saiba que eu tento fazer o meu melhor. Obrigado por me fazer ser uma pessoa melhor por vc.`
+      `obrigado por ter entrado na minha vida, vc e uma pessoa muito especial para mim, espero que vc nunca me deixe. Eu te amo muito meu bem❤️. achei isso simples oq eu fiz mas pode ter certeza que fiquei dias fazendo kkkkk espero que goste. quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigra ou etc, te garanto que sempre fui e vou ser leal a ti.`
     ];
 
     const asciiHearts = [
@@ -182,29 +189,31 @@
       escrever();
     }
 
-    function escreverUnicoComBotao(noteId, texto) {
+    function escreverUnico(noteId, texto) {
       const note = document.getElementById(noteId);
       let i = 0;
       const chars = texto.split("");
-      const botao = document.createElement("button");
-      botao.textContent = "EU TE AMO";
-      botao.onclick = () => {
-        window.open("https://youtu.be/wgPOdUndDQU?si=u3FoBnc2UVwhHod3", "_blank");
-      };
 
       function escreverChar() {
         if (i < chars.length) {
-          let char = chars[i];
-          note.innerHTML += char;
-          i++;
-          if (char === ".") {
-            // Se for o último ponto final, adiciona o botão
-            const restante = chars.slice(i).join("");
-            if (!restante.includes(".")) {
-              note.appendChild(botao);
-            }
+          // Quando encontrar o último ponto final, insere o botão logo após ele
+          if (chars[i] === '.' && i === texto.lastIndexOf('.')) {
+            note.innerHTML += '.';
+            // Criar botão
+            const botao = document.createElement("button");
+            botao.textContent = "EU TE AMO";
+            botao.onclick = () => {
+              window.open("https://youtu.be/wgPOdUndDQU?si=u3FoBnc2UVwhHod3", "_blank");
+            };
+            note.appendChild(botao);
+            i++;
+            setTimeout(escreverChar, 15);
+            return;
+          } else {
+            note.innerHTML += chars[i];
           }
           note.scrollTop = note.scrollHeight;
+          i++;
           setTimeout(escreverChar, 15);
         }
       }
@@ -231,7 +240,7 @@
     }
 
     escreverLoop("note1", frases[0]);
-    escreverUnicoComBotao("note2", frases[1]);
+    escreverUnico("note2", frases[1]);
     loopAscii("note3", asciiHearts);
   </script>
 </body>
