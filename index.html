@@ -10,35 +10,31 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      gap: 10px;
+      gap: 15px;
       padding: 10px;
       overflow-x: auto;
       position: relative;
       perspective: 1000px;
+      height: 100vh;
     }
 
     .heart-bg {
-      position: absolute;
+      position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) rotateY(0deg);
-      width: 80%;
+      width: 60vmin;
       height: auto;
-      opacity: 0;
+      opacity: 0.15;
       pointer-events: none;
-      animation: aparecerCoracao 1.5s ease-in forwards, girarCoracao3D 10s linear infinite;
+      animation: girarCoracao3D 10s linear infinite;
       z-index: 10;
       transform-style: preserve-3d;
     }
 
     @keyframes girarCoracao3D {
       from { transform: translate(-50%, -50%) rotateY(0deg); }
-      to   { transform: translate(-50%, -50%) rotateY(360deg); }
-    }
-
-    @keyframes aparecerCoracao {
-      from { opacity: 0; }
-      to   { opacity: 0.15; }
+      to { transform: translate(-50%, -50%) rotateY(360deg); }
     }
 
     .notepad {
@@ -47,11 +43,11 @@
       animation: ledFlow 4s infinite linear;
       color: violet;
       font-family: monospace;
-      font-size: 14px;
+      font-size: 16px;
       line-height: 1.5;
       word-break: break-word;
-      padding: 10px;
-      width: min(90vw, 300px);
+      padding: 15px;
+      width: 320px;
       height: 95vh;
       overflow-y: auto;
       white-space: pre-wrap;
@@ -62,7 +58,7 @@
     }
 
     @keyframes ledFlow {
-      0%   { background-position: 0% 0%; }
+      0% { background-position: 0% 0%; }
       100% { background-position: 0% 100%; }
     }
 
@@ -86,6 +82,32 @@
       font-style: italic;
       pointer-events: none;
     }
+
+    /* Botão EU TE AMO */
+    #note2 button {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 15px;
+      font-weight: bold;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: blue;
+      color: white;
+      animation: piscarCor 2s infinite alternate;
+      user-select: none;
+      transition: filter 0.3s;
+    }
+
+    #note2 button:hover {
+      filter: brightness(1.2);
+    }
+
+    @keyframes piscarCor {
+      0% { background-color: blue; }
+      100% { background-color: pink; }
+    }
   </style>
 </head>
 <body>
@@ -105,11 +127,28 @@
     ];
 
     const asciiHearts = [
-`  .:::.   .:::.\n :::::::.:::::::\n :::::::::::::::\n ':::::::::::::'\n   ':::::::::'\n     ':::::'\n       ':'`,
+`  .:::.   .:::.
+ :::::::.:::::::
+ :::::::::::::::
+ ':::::::::::::'
+   ':::::::::'
+     ':::::'
+       ':'`,
 
-`   *****     *****\n ********** **********\n***********************\n***********************\n *********************\n   ***************\n     ***********\n       *****\n         *`,
+`   *****     *****
+ ********** **********
+***********************
+***********************
+ *********************
+   ***************
+     ***********
+       *****
+         *`,
 
-`   _  _     _  _\n  ( \\/ ) _ ( \\/ )\n   \\  / (_) \\  /\n   (__)     (__)`
+`   _  _     _  _
+  ( \\/ ) _ ( \\/ )
+   \\  / (_) \\  /
+   (__)     (__)`
     ];
 
     function escreverLoop(noteId, texto) {
@@ -169,36 +208,18 @@
     escreverUnico("note2", frases[1]);
     loopAscii("note3", asciiHearts);
 
-    // Adicionando botão "EU TE AMO" após o texto do bloco 2
+    // Adicionando botão “EU TE AMO” depois do texto no bloco 2
     const botao = document.createElement("button");
     botao.textContent = "EU TE AMO";
-    botao.style.cssText = `
-      display: block;
-      margin-top: 15px;
-      padding: 10px 20px;
-      font-weight: bold;
-      font-size: 16px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      background-color: blue;
-      color: white;
-      animation: piscarCor 2s infinite alternate;
-    `;
-
-    const styleAnim = document.createElement('style');
-    styleAnim.textContent = `
-      @keyframes piscarCor {
-        0% { background-color: blue; }
-        100% { background-color: pink; }
-      }
-    `;
-    document.head.appendChild(styleAnim);
-
     botao.onclick = () => {
       window.open("https://youtu.be/wgPOdUndDQU?si=u3FoBnc2UVwhHod3", "_blank");
     };
 
-    document.getElementById("note2").appendChild(botao);
+    // espera o texto ser todo escrito e aí adiciona o botão
+    setTimeout(() => {
+      document.getElementById("note2").appendChild(botao);
+    }, frases[1].length * 15 + 100); // tempo suficiente para o texto terminar de aparecer
+
   </script>
 </body>
+</html>
