@@ -4,32 +4,37 @@
   <meta charset="UTF-8" />
   <title>Para o Amor</title>
   <style>
+    /* Body full screen, flex linha, sem scroll horizontal */
     body {
       margin: 0;
       background-color: black;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      gap: 15px;
-      padding: 10px;
-      overflow-x: auto;
-      position: relative;
-      perspective: 1000px;
+      align-items: stretch; /* pra blocos ocuparem toda altura */
+      gap: 0;
+      padding: 0;
       height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      position: relative;
+      font-family: monospace;
     }
 
+    /* Coração fixo, atrás dos blocos */
     .heart-bg {
       position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) rotateY(0deg);
       width: 60vmin;
       height: auto;
       opacity: 0.15;
       pointer-events: none;
-      animation: girarCoracao3D 10s linear infinite;
-      z-index: 10;
       transform-style: preserve-3d;
+      animation: girarCoracao3D 10s linear infinite;
+      transform-origin: center;
+      transform-box: fill-box;
+      transform: translate(-50%, -50%) rotateY(0deg);
+      z-index: 1; /* atrás dos blocos */
     }
 
     @keyframes girarCoracao3D {
@@ -37,24 +42,24 @@
       to { transform: translate(-50%, -50%) rotateY(360deg); }
     }
 
+    /* Blocos ocupam 1/3 da largura e 100% da altura */
     .notepad {
       background: linear-gradient(180deg, #d4006f, #003f87, #d4006f);
       background-size: 100% 300%;
       animation: ledFlow 4s infinite linear;
       color: violet;
-      font-family: monospace;
-      font-size: 16px;
-      line-height: 1.5;
-      word-break: break-word;
       padding: 15px;
-      width: 320px;
-      height: 95vh;
+      width: 33.33vw;
+      height: 100vh;
       overflow-y: auto;
       white-space: pre-wrap;
-      border-radius: 10px;
+      border-radius: 0;
       box-shadow: 0 0 25px #d4006f, 0 0 45px #003f87;
       position: relative;
+      font-size: 16px;
+      line-height: 1.5;
       z-index: 2;
+      box-sizing: border-box;
     }
 
     @keyframes ledFlow {
@@ -62,12 +67,12 @@
       100% { background-position: 0% 100%; }
     }
 
+    /* Imagem decorativa e assinatura no bloco 3 */
     #note3 img.decorativa {
       position: absolute;
       bottom: 30px;
       right: 10px;
       width: 60px;
-      height: auto;
       border-radius: 5px;
       box-shadow: 0 0 10px #fff5;
       pointer-events: none;
@@ -83,11 +88,11 @@
       pointer-events: none;
     }
 
-    /* Botão EU TE AMO */
+    /* Botão EU TE AMO estilizado e menor */
     #note2 button {
       display: inline-block;
       margin-top: 12px;
-      padding: 6px 15px;
+      padding: 6px 14px;
       font-weight: bold;
       font-size: 14px;
       border: none;
@@ -208,17 +213,17 @@
     escreverUnico("note2", frases[1]);
     loopAscii("note3", asciiHearts);
 
-    // Adicionando botão “EU TE AMO” depois do texto no bloco 2
+    // Botão EU TE AMO
     const botao = document.createElement("button");
     botao.textContent = "EU TE AMO";
     botao.onclick = () => {
       window.open("https://youtu.be/wgPOdUndDQU?si=u3FoBnc2UVwhHod3", "_blank");
     };
 
-    // espera o texto ser todo escrito e aí adiciona o botão
+    // Inserir o botão só depois do texto terminar de aparecer
     setTimeout(() => {
       document.getElementById("note2").appendChild(botao);
-    }, frases[1].length * 15 + 100); // tempo suficiente para o texto terminar de aparecer
+    }, frases[1].length * 15 + 200);
 
   </script>
 </body>
