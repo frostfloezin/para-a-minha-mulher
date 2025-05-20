@@ -14,6 +14,7 @@
       padding: 10px;
       overflow-x: auto;
       position: relative;
+      perspective: 1000px;
     }
 
     .heart-bg {
@@ -24,28 +25,20 @@
       width: 80%;
       height: auto;
       opacity: 0;
-      pointer-events: none; /* não bloqueia clique */
+      pointer-events: none;
       animation: aparecerCoracao 1.5s ease-in forwards, girarCoracao3D 10s linear infinite;
-      z-index: 10; /* acima dos blocos */
+      z-index: 10;
       transform-style: preserve-3d;
     }
 
     @keyframes girarCoracao3D {
-      from {
-        transform: translate(-50%, -50%) rotateY(0deg);
-      }
-      to {
-        transform: translate(-50%, -50%) rotateY(360deg);
-      }
+      from { transform: translate(-50%, -50%) rotateY(0deg); }
+      to   { transform: translate(-50%, -50%) rotateY(360deg); }
     }
 
     @keyframes aparecerCoracao {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 0.15; /* aumentei aqui */
-      }
+      from { opacity: 0; }
+      to   { opacity: 0.15; }
     }
 
     .notepad {
@@ -54,8 +47,11 @@
       animation: ledFlow 4s infinite linear;
       color: violet;
       font-family: monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      word-break: break-word;
       padding: 10px;
-      width: 30%;
+      width: min(90vw, 300px);
       height: 95vh;
       overflow-y: auto;
       white-space: pre-wrap;
@@ -66,12 +62,8 @@
     }
 
     @keyframes ledFlow {
-      0% {
-        background-position: 0% 0%;
-      }
-      100% {
-        background-position: 0% 100%;
-      }
+      0%   { background-position: 0% 0%; }
+      100% { background-position: 0% 100%; }
     }
 
     #note3 img.decorativa {
@@ -109,32 +101,15 @@
   <script>
     const frases = [
       "i love you 💜",
-      `obrigado por ter entrado na minha vida, vc e uma pessoa muito especial para mim, espero que vc nunca me deixe. Eu te amo muito meu bem❤️. achei isso simples oq eu fiz mas pode ter certeza que fiquei dias fazendo kkkkk espero que goste. quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigra ou etc, te garanto que sempre fui e vou ser leal a ti.`
+      `Obrigado por ter entrado na minha vida, vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem ❤️. Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo, kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigas ou etc; te garanto que sempre fui e vou ser leal a ti. Vc foi a única pessoa que me senti bem e confortável pra ser eu mesmo; esse é um dos vários motivos por quis eu te amo tanto. Espero, mesmo sem ter muita condição financeira pra te dar várias e várias coisa, que vc saiba que eu tento fazer o meu melhor. Obrigado por me fazer ser uma pessoa melhor por vc.`
     ];
 
     const asciiHearts = [
-`  .:::.   .:::.
- :::::::.:::::::
- :::::::::::::::
- ':::::::::::::'
-   ':::::::::'
-     ':::::'
-       ':'`,
+`  .:::.   .:::.\n :::::::.:::::::\n :::::::::::::::\n ':::::::::::::'\n   ':::::::::'\n     ':::::'\n       ':'`,
 
-`   *****     *****
- ********** **********
-***********************
-***********************
- *********************
-   ***************
-     ***********
-       *****
-         *`,
+`   *****     *****\n ********** **********\n***********************\n***********************\n *********************\n   ***************\n     ***********\n       *****\n         *`,
 
-`   _  _     _  _
-  ( \\/ ) _ ( \\/ )
-   \\  / (_) \\  /
-   (__)     (__)`
+`   _  _     _  _\n  ( \\/ ) _ ( \\/ )\n   \\  / (_) \\  /\n   (__)     (__)`
     ];
 
     function escreverLoop(noteId, texto) {
@@ -193,6 +168,37 @@
     escreverLoop("note1", frases[0]);
     escreverUnico("note2", frases[1]);
     loopAscii("note3", asciiHearts);
+
+    // Adicionando botão "EU TE AMO" após o texto do bloco 2
+    const botao = document.createElement("button");
+    botao.textContent = "EU TE AMO";
+    botao.style.cssText = `
+      display: block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: blue;
+      color: white;
+      animation: piscarCor 2s infinite alternate;
+    `;
+
+    const styleAnim = document.createElement('style');
+    styleAnim.textContent = `
+      @keyframes piscarCor {
+        0% { background-color: blue; }
+        100% { background-color: pink; }
+      }
+    `;
+    document.head.appendChild(styleAnim);
+
+    botao.onclick = () => {
+      window.open("https://youtu.be/wgPOdUndDQU?si=u3FoBnc2UVwhHod3", "_blank");
+    };
+
+    document.getElementById("note2").appendChild(botao);
   </script>
 </body>
-</html>
