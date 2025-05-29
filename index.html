@@ -5,6 +5,9 @@
   <title>Para o Amor</title>
   <style>
     body {
+
+
+
       margin: 0;
       background-color: black;
       display: flex;
@@ -31,13 +34,21 @@
     }
 
     @keyframes girarCoracao3D {
-      from { transform: translate(-50%, -50%) rotateY(0deg); }
-      to { transform: translate(-50%, -50%) rotateY(360deg); }
+      from {
+        transform: translate(-50%, -50%) rotateY(0deg);
+      }
+      to {
+        transform: translate(-50%, -50%) rotateY(360deg);
+      }
     }
 
     @keyframes aparecerCoracao {
-      from { opacity: 0; }
-      to { opacity: 0.15; }
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 0.15;
+      }
     }
 
     .notepad {
@@ -59,8 +70,12 @@
     }
 
     @keyframes ledFlow {
-      0% { background-position: 0% 0%; }
-      100% { background-position: 0% 100%; }
+      0% {
+        background-position: 0% 0%;
+      }
+      100% {
+        background-position: 0% 100%;
+      }
     }
 
     #note3 img.decorativa {
@@ -84,6 +99,7 @@
       pointer-events: none;
     }
 
+    /* Botão do tamanho da letra */
     #note2 button {
       display: inline-block;
       margin-left: 5px;
@@ -101,28 +117,20 @@
       vertical-align: middle;
       transition: filter 0.3s;
     }
-
     #note2 button:hover {
       filter: brightness(1.2);
     }
 
     @keyframes piscarCor {
-      0% { background-color: #003f87; }
-      50% { background-color: #d4006f; }
-      100% { background-color: #003f87; }
-    }
-
-    .matrix-letter {
-      display: inline-block;
-      color: violet;
-      font-family: monospace;
-      font-size: 18px;
-      animation: aparecerLetra 0.3s ease-in-out forwards;
-    }
-
-    @keyframes aparecerLetra {
-      from { opacity: 0; transform: translateY(-5px); }
-      to { opacity: 1; transform: translateY(0); }
+      0% {
+        background-color: #003f87;
+      }
+      50% {
+        background-color: #d4006f;
+      }
+      100% {
+        background-color: #003f87;
+      }
     }
   </style>
 </head>
@@ -137,32 +145,53 @@
   </div>
 
   <script>
-    const hackerFont = {
-      'A':'卂','B':'乃','C':'匚','D':'刀','E':'乇','F':'下','G':'厶','H':'卄','I':'工','J':'丁','K':'长','L':'乚','M':'从','N':'𠘨','O':'口','P':'尸','Q':'㔿','R':'尺','S':'丂','T':'丅','U':'凵','V':'リ','W':'山','X':'乂','Y':'丫','Z':'乙',
-      'a':'卂','b':'乃','c':'匚','d':'刀','e':'乇','f':'下','g':'厶','h':'卄','i':'工','j':'丁','k':'长','l':'乚','m':'从','n':'𠘨','o':'口','p':'尸','q':'㔿','r':'尺','s':'丂','t':'丅','u':'凵','v':'リ','w':'山','x':'乂','y':'丫','z':'乙',
-      ' ':' ','❤️':'❤️','💜':'💜'
-    };
+    const frases = [
+      "i love you 💜",
+      Obrigado por ter entrado na minha vida, vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem ❤️. Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo, kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigas ou etc; te garanto que sempre fui e vou ser leal a ti. Vc foi a única pessoa que me senti bem e confortável pra ser eu mesmo; esse é um dos vários motivos por quis eu te amo tanto. Espero, mesmo sem ter muita condição financeira pra te dar várias e várias coisa, que vc saiba que eu tento fazer o meu melhor. Obrigado por me fazer ser uma pessoa melhor por vc.
+    ];
 
-    const frase1 = "eu te amo 💜";
+    const asciiHearts = [
+  .:::.   .:::.
+ :::::::.:::::::
+ :::::::::::::::
+ ':::::::::::::'
+   ':::::::::'
+     ':::::'
+       ':',
 
-    function escreverMatrix(noteId, texto) {
+   *****     *****
+ ********** **********
+***********************
+***********************
+ *********************
+   ***************
+     ***********
+       *****
+         *,
+
+   _  _     _  _
+  ( \\/ ) _ ( \\/ )
+   \\  / (_) \\  /
+   (__)     (__)
+    ];
+
+    function escreverLoop(noteId, texto) {
       const note = document.getElementById(noteId);
-      let i = 0;
-      function escreverLetra() {
-        if (i < texto.length) {
-          const span = document.createElement("span");
-          span.className = "matrix-letter";
-          const char = texto[i];
-          span.textContent = hackerFont[char] || char;
-          note.appendChild(span);
-          i++;
-          setTimeout(escreverLetra, 400);
-        }
-      }
-      escreverLetra();
-    }
+      let line = 1;
 
-    const frase2 = `Obrigado por ter entrado na minha vida, vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem ❤️. Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo, kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigas ou etc; te garanto que sempre fui e vou ser leal a ti. Vc foi a única pessoa que me senti bem e confortável pra ser eu mesmo; esse é um dos vários motivos por quis eu te amo tanto. Espero, mesmo sem ter muita condição financeira pra te dar várias e várias coisa, que vc saiba que eu tento fazer o meu melhor. Obrigado por me fazer ser uma pessoa melhor por vc.`;
+      function escrever() {
+        if (line % 100 === 0) {
+          note.innerHTML += "💜💜💜💜💜💜💜💜💜💜<br>";
+        } else {
+          note.innerHTML += ${texto}<br>;
+        }
+        note.scrollTop = note.scrollHeight;
+        line++;
+        setTimeout(escrever, 20);
+      }
+
+      escrever();
+    }
 
     function escreverUnico(noteId, texto) {
       const note = document.getElementById(noteId);
@@ -171,6 +200,7 @@
 
       function escreverChar() {
         if (i < chars.length) {
+          // Quando achar o último ponto final, coloca o botão logo depois
           if (chars[i] === '.' && i === texto.lastIndexOf('.')) {
             note.innerHTML += '.';
             const botao = document.createElement("button");
@@ -194,8 +224,27 @@
       escreverChar();
     }
 
-    escreverMatrix("note1", frase1);
-    escreverUnico("note2", frase2);
+    function loopAscii(noteId, artes) {
+      const note = document.getElementById(noteId);
+      let i = 0;
+
+      function mostrarArte() {
+        const arteEl = document.createElement("pre");
+        arteEl.textContent = artes[i];
+        note.insertBefore(arteEl, note.querySelector("img.decorativa"));
+        const prev = note.querySelectorAll("pre");
+        if (prev.length > 1) note.removeChild(prev[0]);
+
+        i = (i + 1) % artes.length;
+        setTimeout(mostrarArte, 1000);
+      }
+
+      mostrarArte();
+    }
+
+    escreverLoop("note1", frases[0]);
+    escreverUnico("note2", frases[1]);
+    loopAscii("note3", asciiHearts);
   </script>
 </body>
 </html>
