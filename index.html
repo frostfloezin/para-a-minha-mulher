@@ -31,21 +31,13 @@
     }
 
     @keyframes girarCoracao3D {
-      from {
-        transform: translate(-50%, -50%) rotateY(0deg);
-      }
-      to {
-        transform: translate(-50%, -50%) rotateY(360deg);
-      }
+      from { transform: translate(-50%, -50%) rotateY(0deg); }
+      to { transform: translate(-50%, -50%) rotateY(360deg); }
     }
 
     @keyframes aparecerCoracao {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 0.15;
-      }
+      from { opacity: 0; }
+      to { opacity: 0.15; }
     }
 
     .notepad {
@@ -67,12 +59,8 @@
     }
 
     @keyframes ledFlow {
-      0% {
-        background-position: 0% 0%;
-      }
-      100% {
-        background-position: 0% 100%;
-      }
+      0% { background-position: 0% 0%; }
+      100% { background-position: 0% 100%; }
     }
 
     #note3 img.decorativa {
@@ -119,33 +107,22 @@
     }
 
     @keyframes piscarCor {
-      0% {
-        background-color: #003f87;
-      }
-      50% {
-        background-color: #d4006f;
-      }
-      100% {
-        background-color: #003f87;
-      }
+      0% { background-color: #003f87; }
+      50% { background-color: #d4006f; }
+      100% { background-color: #003f87; }
     }
 
     .matrix-letter {
       display: inline-block;
-      animation: fall 1s linear infinite;
-      color: #00ff00;
+      color: violet;
       font-family: monospace;
+      font-size: 18px;
+      animation: aparecerLetra 0.3s ease-in-out forwards;
     }
 
-    @keyframes fall {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes aparecerLetra {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -166,53 +143,26 @@
       ' ':' ','❤️':'❤️','💜':'💜'
     };
 
-    const frases = [
-      "eu te amo 💜",
-      `Obrigado por ter entrado na minha vida, vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem ❤️. Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo, kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigas ou etc; te garanto que sempre fui e vou ser leal a ti. Vc foi a única pessoa que me senti bem e confortável pra ser eu mesmo; esse é um dos vários motivos por quis eu te amo tanto. Espero, mesmo sem ter muita condição financeira pra te dar várias e várias coisa, que vc saiba que eu tento fazer o meu melhor. Obrigado por me fazer ser uma pessoa melhor por vc.`
-    ];
-
-    const asciiHearts = [
-`  .:::.   .:::.
- :::::::.:::::::
- :::::::::::::::
- ':::::::::::::'
-   ':::::::::'
-     ':::::'
-       ':'`,
-`   *****     *****
- ********** **********
-***********************
-***********************
- *********************
-   ***************
-     ***********
-       *****
-         *`,
-`   _  _     _  _
-  ( \\/ ) _ ( \\/ )
-   \\  / (_) \\  /
-   (__)     (__)`
-    ];
+    const frase1 = "eu te amo 💜";
 
     function escreverMatrix(noteId, texto) {
       const note = document.getElementById(noteId);
       let i = 0;
-
       function escreverLetra() {
         if (i < texto.length) {
           const span = document.createElement("span");
-          const char = texto[i];
           span.className = "matrix-letter";
+          const char = texto[i];
           span.textContent = hackerFont[char] || char;
           note.appendChild(span);
-          note.appendChild(document.createElement("br"));
           i++;
-          setTimeout(escreverLetra, 100);
+          setTimeout(escreverLetra, 400);
         }
       }
-
       escreverLetra();
     }
+
+    const frase2 = `Obrigado por ter entrado na minha vida, vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem ❤️. Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo, kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigas ou etc; te garanto que sempre fui e vou ser leal a ti. Vc foi a única pessoa que me senti bem e confortável pra ser eu mesmo; esse é um dos vários motivos por quis eu te amo tanto. Espero, mesmo sem ter muita condição financeira pra te dar várias e várias coisa, que vc saiba que eu tento fazer o meu melhor. Obrigado por me fazer ser uma pessoa melhor por vc.`;
 
     function escreverUnico(noteId, texto) {
       const note = document.getElementById(noteId);
@@ -244,27 +194,8 @@
       escreverChar();
     }
 
-    function loopAscii(noteId, artes) {
-      const note = document.getElementById(noteId);
-      let i = 0;
-
-      function mostrarArte() {
-        const arteEl = document.createElement("pre");
-        arteEl.textContent = artes[i];
-        note.insertBefore(arteEl, note.querySelector("img.decorativa"));
-        const prev = note.querySelectorAll("pre");
-        if (prev.length > 1) note.removeChild(prev[0]);
-
-        i = (i + 1) % artes.length;
-        setTimeout(mostrarArte, 1000);
-      }
-
-      mostrarArte();
-    }
-
-    escreverMatrix("note1", frases[0]);
-    escreverUnico("note2", frases[1]);
-    loopAscii("note3", asciiHearts);
+    escreverMatrix("note1", frase1);
+    escreverUnico("note2", frase2);
   </script>
 </body>
 </html>
