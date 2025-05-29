@@ -5,9 +5,6 @@
   <title>Para o Amor</title>
   <style>
     body {
-
-
-
       margin: 0;
       background-color: black;
       display: flex;
@@ -147,19 +144,19 @@
   <script>
     const frases = [
       "i love you 💜",
-      Obrigado por ter entrado na minha vida, vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem ❤️. Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo, kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigas ou etc; te garanto que sempre fui e vou ser leal a ti. Vc foi a única pessoa que me senti bem e confortável pra ser eu mesmo; esse é um dos vários motivos por quis eu te amo tanto. Espero, mesmo sem ter muita condição financeira pra te dar várias e várias coisa, que vc saiba que eu tento fazer o meu melhor. Obrigado por me fazer ser uma pessoa melhor por vc.
+      `Obrigado por ter entrado na minha vida, vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem ❤️. Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo, kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigas ou etc; te garanto que sempre fui e vou ser leal a ti. Vc foi a única pessoa que me senti bem e confortável pra ser eu mesmo; esse é um dos vários motivos por quis eu te amo tanto. Espero, mesmo sem ter muita condição financeira pra te dar várias e várias coisa, que vc saiba que eu tento fazer o meu melhor. Obrigado por me fazer ser uma pessoa melhor por vc.`
     ];
 
     const asciiHearts = [
-  .:::.   .:::.
+`  .:::.   .:::.
  :::::::.:::::::
  :::::::::::::::
  ':::::::::::::'
    ':::::::::'
      ':::::'
-       ':',
+       ':'`,
 
-   *****     *****
+`   *****     *****
  ********** **********
 ***********************
 ***********************
@@ -167,12 +164,12 @@
    ***************
      ***********
        *****
-         *,
+         *`,
 
-   _  _     _  _
+`   _  _     _  _
   ( \\/ ) _ ( \\/ )
    \\  / (_) \\  /
-   (__)     (__)
+   (__)     (__)`
     ];
 
     function escreverLoop(noteId, texto) {
@@ -183,7 +180,7 @@
         if (line % 100 === 0) {
           note.innerHTML += "💜💜💜💜💜💜💜💜💜💜<br>";
         } else {
-          note.innerHTML += ${texto}<br>;
+          note.innerHTML += `${texto}<br>`;
         }
         note.scrollTop = note.scrollHeight;
         line++;
