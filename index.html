@@ -96,7 +96,6 @@
       pointer-events: none;
     }
 
-    /* Botão do tamanho da letra */
     #note2 button {
       display: inline-block;
       margin-left: 5px;
@@ -114,6 +113,7 @@
       vertical-align: middle;
       transition: filter 0.3s;
     }
+
     #note2 button:hover {
       filter: brightness(1.2);
     }
@@ -129,6 +129,24 @@
         background-color: #003f87;
       }
     }
+
+    .matrix-letter {
+      display: inline-block;
+      animation: fall 1s linear infinite;
+      color: #00ff00;
+      font-family: monospace;
+    }
+
+    @keyframes fall {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
@@ -142,8 +160,14 @@
   </div>
 
   <script>
+    const hackerFont = {
+      'A':'卂','B':'乃','C':'匚','D':'刀','E':'乇','F':'下','G':'厶','H':'卄','I':'工','J':'丁','K':'长','L':'乚','M':'从','N':'𠘨','O':'口','P':'尸','Q':'㔿','R':'尺','S':'丂','T':'丅','U':'凵','V':'リ','W':'山','X':'乂','Y':'丫','Z':'乙',
+      'a':'卂','b':'乃','c':'匚','d':'刀','e':'乇','f':'下','g':'厶','h':'卄','i':'工','j':'丁','k':'长','l':'乚','m':'从','n':'𠘨','o':'口','p':'尸','q':'㔿','r':'尺','s':'丂','t':'丅','u':'凵','v':'リ','w':'山','x':'乂','y':'丫','z':'乙',
+      ' ':' ','❤️':'❤️','💜':'💜'
+    };
+
     const frases = [
-      "i love you 💜",
+      "eu te amo 💜",
       `Obrigado por ter entrado na minha vida, vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem ❤️. Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo, kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigas ou etc; te garanto que sempre fui e vou ser leal a ti. Vc foi a única pessoa que me senti bem e confortável pra ser eu mesmo; esse é um dos vários motivos por quis eu te amo tanto. Espero, mesmo sem ter muita condição financeira pra te dar várias e várias coisa, que vc saiba que eu tento fazer o meu melhor. Obrigado por me fazer ser uma pessoa melhor por vc.`
     ];
 
@@ -155,7 +179,6 @@
    ':::::::::'
      ':::::'
        ':'`,
-
 `   *****     *****
  ********** **********
 ***********************
@@ -165,29 +188,30 @@
      ***********
        *****
          *`,
-
 `   _  _     _  _
   ( \\/ ) _ ( \\/ )
    \\  / (_) \\  /
    (__)     (__)`
     ];
 
-    function escreverLoop(noteId, texto) {
+    function escreverMatrix(noteId, texto) {
       const note = document.getElementById(noteId);
-      let line = 1;
+      let i = 0;
 
-      function escrever() {
-        if (line % 100 === 0) {
-          note.innerHTML += "💜💜💜💜💜💜💜💜💜💜<br>";
-        } else {
-          note.innerHTML += `${texto}<br>`;
+      function escreverLetra() {
+        if (i < texto.length) {
+          const span = document.createElement("span");
+          const char = texto[i];
+          span.className = "matrix-letter";
+          span.textContent = hackerFont[char] || char;
+          note.appendChild(span);
+          note.appendChild(document.createElement("br"));
+          i++;
+          setTimeout(escreverLetra, 100);
         }
-        note.scrollTop = note.scrollHeight;
-        line++;
-        setTimeout(escrever, 20);
       }
 
-      escrever();
+      escreverLetra();
     }
 
     function escreverUnico(noteId, texto) {
@@ -197,7 +221,6 @@
 
       function escreverChar() {
         if (i < chars.length) {
-          // Quando achar o último ponto final, coloca o botão logo depois
           if (chars[i] === '.' && i === texto.lastIndexOf('.')) {
             note.innerHTML += '.';
             const botao = document.createElement("button");
@@ -239,7 +262,7 @@
       mostrarArte();
     }
 
-    escreverLoop("note1", frases[0]);
+    escreverMatrix("note1", frases[0]);
     escreverUnico("note2", frases[1]);
     loopAscii("note3", asciiHearts);
   </script>
