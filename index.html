@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <title>Para o Amor</title>
@@ -31,21 +31,13 @@
     }
 
     @keyframes girarCoracao3D {
-      from {
-        transform: translate(-50%, -50%) rotateY(0deg);
-      }
-      to {
-        transform: translate(-50%, -50%) rotateY(360deg);
-      }
+      from { transform: translate(-50%, -50%) rotateY(0deg); }
+      to { transform: translate(-50%, -50%) rotateY(360deg); }
     }
 
     @keyframes aparecerCoracao {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 0.15;
-      }
+      from { opacity: 0; }
+      to { opacity: 0.15; }
     }
 
     .notepad {
@@ -67,12 +59,8 @@
     }
 
     @keyframes ledFlow {
-      0% {
-        background-position: 0% 0%;
-      }
-      100% {
-        background-position: 0% 100%;
-      }
+      0% { background-position: 0% 0%; }
+      100% { background-position: 0% 100%; }
     }
 
     #note3 img.decorativa {
@@ -96,38 +84,25 @@
       pointer-events: none;
     }
 
-    /* Botão do tamanho da letra */
+    /* botão do tamanho da fonte */
     #note2 button {
       display: inline-block;
-      margin-left: 5px;
-      padding: 0 4px;
+      margin-left: 4px;
+      padding: 0 5px;
       font-weight: bold;
       font-size: 14px;
-      line-height: 1;
+      line-height: 1.2;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
-      background-color: blue;
+      background-color: #003f87;
       color: white;
       animation: piscarCor 2s infinite alternate;
-      user-select: none;
-      vertical-align: middle;
-      transition: filter 0.3s;
-    }
-    #note2 button:hover {
-      filter: brightness(1.2);
     }
 
     @keyframes piscarCor {
-      0% {
-        background-color: #003f87;
-      }
-      50% {
-        background-color: #d4006f;
-      }
-      100% {
-        background-color: #003f87;
-      }
+      0% { background-color: #003f87; }
+      100% { background-color: #d4006f; }
     }
   </style>
 </head>
@@ -175,7 +150,6 @@
     function escreverLoop(noteId, texto) {
       const note = document.getElementById(noteId);
       let line = 1;
-
       function escrever() {
         if (line % 100 === 0) {
           note.innerHTML += "💜💜💜💜💜💜💜💜💜💜<br>";
@@ -186,7 +160,6 @@
         line++;
         setTimeout(escrever, 20);
       }
-
       escrever();
     }
 
@@ -194,48 +167,37 @@
       const note = document.getElementById(noteId);
       let i = 0;
       const chars = texto.split("");
-
       function escreverChar() {
         if (i < chars.length) {
-          // Quando achar o último ponto final, coloca o botão logo depois
-          if (chars[i] === '.' && i === texto.lastIndexOf('.')) {
-            note.innerHTML += '.';
+          note.innerHTML += chars[i];
+          if (i === chars.length - 1) {
             const botao = document.createElement("button");
             botao.textContent = "EU TE AMO";
             botao.onclick = () => {
               window.open("https://youtu.be/wgPOdUndDQU?si=u3FoBnc2UVwhHod3", "_blank");
             };
             note.appendChild(botao);
-            i++;
-            setTimeout(escreverChar, 15);
-            return;
-          } else {
-            note.innerHTML += chars[i];
           }
           note.scrollTop = note.scrollHeight;
           i++;
           setTimeout(escreverChar, 15);
         }
       }
-
       escreverChar();
     }
 
     function loopAscii(noteId, artes) {
       const note = document.getElementById(noteId);
       let i = 0;
-
       function mostrarArte() {
         const arteEl = document.createElement("pre");
         arteEl.textContent = artes[i];
         note.insertBefore(arteEl, note.querySelector("img.decorativa"));
         const prev = note.querySelectorAll("pre");
         if (prev.length > 1) note.removeChild(prev[0]);
-
         i = (i + 1) % artes.length;
         setTimeout(mostrarArte, 1000);
       }
-
       mostrarArte();
     }
 
