@@ -162,26 +162,37 @@ Feliz Dia dos Namorados! ❤️`
    (__)     (__)`
     ];
 
-    function escreverZigZag(noteId, texto) {
+    // zig zag suave e rápido no bloco 1
+    function escreverZigZagLoop(noteId, texto) {
       const note = document.getElementById(noteId);
-      let output = "";
       let indent = 0;
       let step = 1;
-      const maxIndent = 15;
+      let i = 0;
+      note.textContent = "";
 
-      for (let i = 0; i < texto.length; i++) {
-        output += " ".repeat(indent) + texto[i] + "\n";
+      function escrever() {
+        let linha = " ".repeat(indent) + texto[i];
+        note.textContent += linha + "\n";
+        note.scrollTop = note.scrollHeight;
+
         indent += step;
-        if (indent === maxIndent || indent === 0) step = -step;
+        if (indent === 10 || indent === 0) step = -step;
+
+        i++;
+        if (i >= texto.length) i = 0;
+
+        setTimeout(escrever, 50);
       }
-      note.textContent = output;
-      note.scrollTop = note.scrollHeight;
+      escrever();
     }
 
+    // bloco 2 escreve texto único com botão
     function escreverUnico(noteId, texto) {
       const note = document.getElementById(noteId);
       let i = 0;
       const chars = texto.split("");
+      note.innerHTML = "";
+
       function escreverChar() {
         if (i < chars.length) {
           note.innerHTML += chars[i];
@@ -201,9 +212,11 @@ Feliz Dia dos Namorados! ❤️`
       escreverChar();
     }
 
+    // loop ascii no bloco 3
     function loopAscii(noteId, artes) {
       const note = document.getElementById(noteId);
       let i = 0;
+
       function mostrarArte() {
         const arteEl = document.createElement("pre");
         arteEl.textContent = artes[i];
@@ -216,7 +229,7 @@ Feliz Dia dos Namorados! ❤️`
       mostrarArte();
     }
 
-    escreverZigZag("note1", frases[0]);
+    escreverZigZagLoop("note1", frases[0]);
     escreverUnico("note2", frases[1]);
     loopAscii("note3", asciiHearts);
   </script>
