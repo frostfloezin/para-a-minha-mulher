@@ -162,7 +162,6 @@ Feliz Dia dos Namorados! ❤️`
    (__)     (__)`
     ];
 
-    // zig zag suave e rápido no bloco 1
     function escreverZigZagLoop(noteId, texto) {
       const note = document.getElementById(noteId);
       let indent = 0;
@@ -171,6 +170,7 @@ Feliz Dia dos Namorados! ❤️`
       note.textContent = "";
 
       function escrever() {
+        // pega o caractere atual da string, faz a indentação e escreve linha
         let linha = " ".repeat(indent) + texto[i];
         note.textContent += linha + "\n";
         note.scrollTop = note.scrollHeight;
@@ -181,12 +181,11 @@ Feliz Dia dos Namorados! ❤️`
         i++;
         if (i >= texto.length) i = 0;
 
-        setTimeout(escrever, 50);
+        setTimeout(escrever, 100);
       }
       escrever();
     }
 
-    // bloco 2 escreve texto único com botão
     function escreverUnico(noteId, texto) {
       const note = document.getElementById(noteId);
       let i = 0;
@@ -212,7 +211,6 @@ Feliz Dia dos Namorados! ❤️`
       escreverChar();
     }
 
-    // loop ascii no bloco 3
     function loopAscii(noteId, artes) {
       const note = document.getElementById(noteId);
       let i = 0;
