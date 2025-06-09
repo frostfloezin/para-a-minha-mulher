@@ -116,8 +116,43 @@
   </div>
 
   <script>
+    const frase = "i love you 💜";
+    const maxSpaces = 20;
+
+    const note1 = document.getElementById("note1");
+
+    let lineCount = 0;
+
+    function zigzagDuasFrases() {
+      function linhaZigzag1(index) {
+        const spaceCount = index % maxSpaces;
+        return " ".repeat(spaceCount) + frase;
+      }
+
+      function linhaZigzag2(index) {
+        const spaceCount = maxSpaces - (index % maxSpaces);
+        return " ".repeat(spaceCount) + frase;
+      }
+
+      function escreverLinha() {
+        let textoLinha = "";
+        if(lineCount % 2 === 0) {
+          textoLinha = linhaZigzag1(lineCount);
+        } else {
+          textoLinha = linhaZigzag2(lineCount);
+        }
+        note1.innerText += textoLinha + "\n";
+        note1.scrollTop = note1.scrollHeight;
+        lineCount++;
+        setTimeout(escreverLinha, 100);
+      }
+
+      escreverLinha();
+    }
+
+    zigzagDuasFrases();
+
     const frases = [
-      "i love you 💜",
       `Obrigado por ter entrado na minha vida. Vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem. ❤️
 
 Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo, kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gente sempre resolva qualquer tipo de brigas ou etc; te garanto que sempre fui e vou ser leal a ti.
@@ -137,56 +172,10 @@ Amor, vc não é uma aposta ou algo do tipo. Eu odeio esse tipo de coisa e eu re
 Feliz Dia dos Namorados! ❤️`
     ];
 
-    const asciiHearts = [
-`  .:::.   .:::.
- :::::::.:::::::
- :::::::::::::::
- ':::::::::::::'
-   ':::::::::'
-     ':::::'
-       ':'`,
-
-`   *****     *****
- ********** **********
-***********************
-***********************
- *********************
-   ***************
-     ***********
-       *****
-         *`,
-
-`   _  _     _  _
-  ( \\/ ) _ ( \\/ )
-   \\  / (_) \\  /
-   (__)     (__)`
-    ];
-
-    function escreverZigZagFrase(noteId, frase) {
-      const note = document.getElementById(noteId);
-      let indent = 0;
-      let step = 1;
-      note.textContent = "";
-
-      function loop() {
-        note.textContent += " ".repeat(indent) + frase + "\n";
-        note.scrollTop = note.scrollHeight;
-
-        indent += step;
-        if (indent === 10 || indent === 0) step = -step;
-
-        setTimeout(loop, 200);
-      }
-
-      loop();
-    }
-
     function escreverUnico(noteId, texto) {
       const note = document.getElementById(noteId);
       let i = 0;
       const chars = texto.split("");
-      note.innerHTML = "";
-
       function escreverChar() {
         if (i < chars.length) {
           note.innerHTML += chars[i];
@@ -209,22 +198,42 @@ Feliz Dia dos Namorados! ❤️`
     function loopAscii(noteId, artes) {
       const note = document.getElementById(noteId);
       let i = 0;
-
+      const asciiHearts = [
+`  .:::.   .:::.
+ :::::::.:::::::
+ :::::::::::::::
+ ':::::::::::::'
+   ':::::::::'
+     ':::::'
+       ':'`,
+`   *****     *****
+ ********** **********
+***********************
+***********************
+ *********************
+   ***************
+     ***********
+       *****
+         *`,
+`   _  _     _  _
+  ( \\/ ) _ ( \\/ )
+   \\  / (_) \\  /
+   (__)     (__)`
+      ];
       function mostrarArte() {
         const arteEl = document.createElement("pre");
-        arteEl.textContent = artes[i];
+        arteEl.textContent = asciiHearts[i];
         note.insertBefore(arteEl, note.querySelector("img.decorativa"));
         const prev = note.querySelectorAll("pre");
         if (prev.length > 1) note.removeChild(prev[0]);
-        i = (i + 1) % artes.length;
+        i = (i + 1) % asciiHearts.length;
         setTimeout(mostrarArte, 1000);
       }
       mostrarArte();
     }
 
-    escreverZigZagFrase("note1", frases[0]);
-    escreverUnico("note2", frases[1]);
-    loopAscii("note3", asciiHearts);
+    escreverUnico("note2", frases[0]);
+    loopAscii("note3");
   </script>
 </body>
 </html>
