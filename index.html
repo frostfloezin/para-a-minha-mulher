@@ -118,25 +118,51 @@
   <script>
     const frases = [
       "i love you 💜",
-      `Obrigado por ter entrado na minha vida. Vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem. ❤️
-
-Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo, kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gente sempre resolva qualquer tipo de brigas ou etc; te garanto que sempre fui e vou ser leal a ti.
-
-Vc foi a única pessoa que me senti bem e confortável pra ser eu mesmo; esse é um dos vários motivos por quais eu te amo tanto. Mesmo sem ter muita condição financeira pra te dar várias e várias coisas, quero que vc saiba que eu tento fazer o meu melhor.
-
-Obrigado por me fazer ser uma pessoa melhor por vc. Quero que vc saiba que eu te acho incrível e perfeita do jeito que vc é. Espero também que vc me conte sobre as suas inseguranças e oq vc realmente tem medo. Sempre vou tentar te ajudar e te entender.
-
-Quero que saiba tmb que eu não te quero só pra coisas sexuais ou etc. Eu realmente quero dar certo com vc e ter um futuro com vc, não apenas prazer. No dia que gnt começou a conversar eu nem imaginava que eu ia te amar tanto que nem eu amo, e eu agradeço tanto por aquele dia.
-
-Vc é muito especial pra mim. Eu prometo fazer o meu melhor por a gente. Quero que confie em mim pra tudo. Vc pode ter receio de eu acabar julgando ou não entender, mas isso é umas das coisas impossíveis de eu fazer. Sempre vou tentar te entender, nunca vou te julgar. Faziam muito isso cmg e eu não quero isso pra vc.
-
-Sou tão grato a você. Vc fez eu perder vários e vários medos. Vc realmente me faz bem, meu amor. Isso que eu fiz pra ti não é nem um terço do que vc merece.
-
-Amor, vc não é uma aposta ou algo do tipo. Eu odeio esse tipo de coisa e eu realmente te quero pro resto da minha vida. Enfim, amor, quero que vc saiba que vc é incrível e perfeita e que merece muito mais do que essas coisas.
-
-Feliz Dia dos Namorados! ❤️`
+      `Obrigado por ter entrado na minha vida, vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem ❤️. Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo, kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gnt sempre resolva qualquer tipo de brigas ou etc; te garanto que sempre fui e vou ser leal a ti. Vc foi a única pessoa que me senti bem e confortável pra ser eu mesmo; esse é um dos vários motivos por quis eu te amo tanto. Espero, mesmo sem ter muita condição financeira pra te dar várias e várias coisa, que vc saiba que eu tento fazer o meu melhor. Obrigado por me fazer ser uma pessoa melhor por vc.`
     ];
 
+    // zig-zag no bloco 1
+    function escreverZigZag(noteId, texto) {
+      const note = document.getElementById(noteId);
+      let linha = 0;
+      let maxSpaces = 10;
+      let direction = 1;
+      function escrever() {
+        let spaces = " ".repeat(linha);
+        note.innerHTML += spaces + texto + "<br>";
+        linha += direction;
+        if (linha >= maxSpaces || linha <= 0) direction *= -1;
+        note.scrollTop = note.scrollHeight;
+        setTimeout(escrever, 150);
+      }
+      escrever();
+    }
+
+    // escreve texto do bloco 2 com botão
+    function escreverUnico(noteId, texto) {
+      const note = document.getElementById(noteId);
+      let i = 0;
+      const chars = texto.split("");
+      function escreverChar() {
+        if (i < chars.length) {
+          note.innerHTML += chars[i];
+          if (i === chars.length - 1) {
+            const botao = document.createElement("button");
+            botao.textContent = "EU TE AMO";
+            botao.onclick = () => {
+              window.open("https://youtu.be/wgPOdUndDQU?si=u3FoBnc2UVwhHod3", "_blank");
+            };
+            note.appendChild(botao);
+          }
+          note.scrollTop = note.scrollHeight;
+          i++;
+          setTimeout(escreverChar, 15);
+        }
+      }
+      escreverChar();
+    }
+
+    // arte ASCII no bloco 3
     const asciiHearts = [
 `  .:::.   .:::.
  :::::::.:::::::
@@ -162,45 +188,6 @@ Feliz Dia dos Namorados! ❤️`
    (__)     (__)`
     ];
 
-    function escreverLoop(noteId, texto) {
-      const note = document.getElementById(noteId);
-      let line = 1;
-      function escrever() {
-        if (line % 100 === 0) {
-          note.innerHTML += "💜💜💜💜💜💜💜💜💜💜<br>";
-        } else {
-          note.innerHTML += `${texto}<br>`;
-        }
-        note.scrollTop = note.scrollHeight;
-        line++;
-        setTimeout(escrever, 20);
-      }
-      escrever();
-    }
-
-    function escreverUnico(noteId, texto) {
-      const note = document.getElementById(noteId);
-      let i = 0;
-      const chars = texto.split("");
-      function escreverChar() {
-        if (i < chars.length) {
-          note.innerHTML += chars[i];
-          if (i === chars.length - 1) {
-            const botao = document.createElement("button");
-            botao.textContent = "EU TE AMO";
-            botao.onclick = () => {
-              window.open("https://youtu.be/wgPOdUndDQU?si=u3FoBnc2UVwhHod3", "_blank");
-            };
-            note.appendChild(botao);
-          }
-          note.scrollTop = note.scrollHeight;
-          i++;
-          setTimeout(escreverChar, 15);
-        }
-      }
-      escreverChar();
-    }
-
     function loopAscii(noteId, artes) {
       const note = document.getElementById(noteId);
       let i = 0;
@@ -216,7 +203,7 @@ Feliz Dia dos Namorados! ❤️`
       mostrarArte();
     }
 
-    escreverLoop("note1", frases[0]);
+    escreverZigZag("note1", frases[0]);
     escreverUnico("note2", frases[1]);
     loopAscii("note3", asciiHearts);
   </script>
