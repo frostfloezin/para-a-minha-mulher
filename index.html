@@ -1,26 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <title>Para o Amor</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      background-color: #000;
+      margin: 0;
+      background-color: black;
       display: flex;
       justify-content: center;
       align-items: flex-start;
       gap: 10px;
       padding: 10px;
       overflow-x: auto;
-      height: 100vh;
       position: relative;
-      font-family: monospace;
     }
 
     .heart-bg {
@@ -52,6 +46,7 @@
       background-size: 100% 300%;
       animation: ledFlow 4s infinite linear;
       color: violet;
+      font-family: monospace;
       padding: 10px;
       width: 30%;
       height: 95vh;
@@ -103,18 +98,6 @@
       background-color: #003f87;
       color: white;
       animation: piscarCor 2s infinite alternate;
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
-
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn 0.8s forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
 
     @keyframes piscarCor {
@@ -170,7 +153,8 @@
 
     zigzagDuasFrases();
 
-    const frases = [`Obrigado por ter entrado na minha vida. Vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem. ❤️
+    const frases = [
+      `Obrigado por ter entrado na minha vida. Vc é uma pessoa muito especial para mim; espero que vc nunca me deixe. Eu te amo muito, meu bem. ❤️
 
 Achei isso simples oq eu fiz, mas pode ter certeza que fiquei dias fazendo, kkkkk. Espero que goste. Quero que fique cmg pra sempre e que a gente sempre resolva qualquer tipo de brigas ou etc; te garanto que sempre fui e vou ser leal a ti.
 
@@ -186,43 +170,33 @@ Sou tão grato a você. Vc fez eu perder vários e vários medos. Vc realmente m
 
 Amor, vc não é uma aposta ou algo do tipo. Eu odeio esse tipo de coisa e eu realmente te quero pro resto da minha vida. Enfim, amor, quero que vc saiba que vc é incrível e perfeita e que merece muito mais do que essas coisas.
 
-Feliz Dia dos Namorados! ❤️`];
+Feliz Dia dos Namorados! ❤️`
+    ];
 
     function escreverUnico(noteId, texto) {
       const note = document.getElementById(noteId);
       let i = 0;
       const chars = texto.split("");
-
       function escreverChar() {
         if (i < chars.length) {
-          const span = document.createElement("span");
-          span.textContent = chars[i];
-          span.classList.add("fade-in");
-          note.appendChild(span);
-
+          note.innerHTML += chars[i];
           if (i === chars.length - 1) {
             const botao = document.createElement("button");
-            botao.textContent = "CLIQUE";
+            botao.textContent = "EU TE AMO";
             botao.onclick = () => {
               window.open("https://youtu.be/wgPOdUndDQU?si=u3FoBnc2UVwhHod3", "_blank");
             };
-            setTimeout(() => {
-              botao.style.opacity = "1";
-            }, 200);
-            note.appendChild(document.createElement("br"));
             note.appendChild(botao);
           }
-
           note.scrollTop = note.scrollHeight;
           i++;
           setTimeout(escreverChar, 15);
         }
       }
-
       escreverChar();
     }
 
-    function loopAscii(noteId) {
+    function loopAscii(noteId, artes) {
       const note = document.getElementById(noteId);
       let i = 0;
       const asciiHearts = [
@@ -233,7 +207,6 @@ Feliz Dia dos Namorados! ❤️`];
    ':::::::::'
      ':::::'
        ':'`,
-
 `   *****     *****
  ********** **********
 ***********************
@@ -243,13 +216,11 @@ Feliz Dia dos Namorados! ❤️`];
      ***********
        *****
          *`,
-
 `   _  _     _  _
   ( \\/ ) _ ( \\/ )
    \\  / (_) \\  /
    (__)     (__)`
       ];
-
       function mostrarArte() {
         const arteEl = document.createElement("pre");
         arteEl.textContent = asciiHearts[i];
@@ -259,7 +230,6 @@ Feliz Dia dos Namorados! ❤️`];
         i = (i + 1) % asciiHearts.length;
         setTimeout(mostrarArte, 1000);
       }
-
       mostrarArte();
     }
 
